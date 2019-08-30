@@ -2,9 +2,14 @@
   "name": "cypress-mailtrap",
   "version": "1.0.0",
   "description": "Cypress Commands for interacting with Mailtrap.io",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --opts ./mocha.opts test/*.spec.js",
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "lint": "gulp lint",
+    "prepublishOnly": "scripts/prepublish.sh",
+    "postpublish": "scripts/postpublish.sh"
   },
   "repository": {
     "type": "git",
@@ -21,10 +26,65 @@
     "url": "https://github.com/xedi/cypress-mailtrap/issues"
   },
   "homepage": "https://github.com/xedi/cypress-mailtrap#readme",
+  "publishConfig": {
+    "registry": "http://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@xedi/mailtrap": "^1.2.0"
   },
+  "devDependencies": {
+    "babel-core": "^6.7.7",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "3.0.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "babelify": "^7.3.0",
+    "braces": ">=2.3.1",
+    "browserify": "^13.0.0",
+    "del": "^2.2.0",
+    "diff": ">=3.5.0",
+    "eslint": "^4.18.2",
+    "eslint-config-google": "^0.7.0",
+    "eslint-plugin-mocha": "^4.7.0",
+    "growl": ">=1.10.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jscs-stylish": "^1.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "jsdoc": "^3.4.0",
+    "mocha": "^3.1.2",
+    "must": "^0.13.4",
+    "nock": "^10.0.6",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
   "files": [
     "lib/*"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      [
+        "add-module-exports",
+        "transform-es2015-modules-umd"
+      ]
+    ],
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      },
+      "tests": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  }
 }
