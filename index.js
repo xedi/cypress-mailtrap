@@ -1,1 +1,1 @@
-import Mailtrap from './src/Mailtrap';
+import Commands from './src/Commands';

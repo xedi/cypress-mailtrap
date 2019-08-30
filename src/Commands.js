@@ -26,9 +26,9 @@ export default function({ Cypress, cy }) {
 
             Mailtrap.setAuthorizationToken(api_token)
                 .inbox(inbox_id)
-                .waitForEmail(
-                    email_address,
-                    (message) => {
+                .waitForEmail({ 'to_email': email_address })
+                .then(
+                    async (message) => {
                         const body = await message.getHtmlBody(),
                             doc = new DOMParser().parseFromString(body, 'text/html'),
                             btn = doc.querySelector('a');
@@ -40,11 +40,9 @@ export default function({ Cypress, cy }) {
 
                         await message.delete();
 
-                        resolve(true);
+                        resolve();
                     },
-                    (error) => {
-                        reject(error);
-                    }
+                    reject
                 );
         });
     });
@@ -56,9 +54,9 @@ export default function({ Cypress, cy }) {
         return new Promise((resolve, reject) => {
             Mailtrap.setAuthorizationToken(api_token)
                 .inbox(inbox_id)
-                .waitForEmail(
-                    email_address,
-                    (message) => {
+                .waitForEmail({ 'to_email': email_address })
+                .then(
+                    async (message) => {
                         const body = await message.getHtmlBody(),
                             doc = new DOMParser().parseFromString(body, 'text/html'),
                             btn = doc.querySelector('a');
@@ -68,11 +66,9 @@ export default function({ Cypress, cy }) {
                         cy.get('#password_confirmation').type(new_password);
                         cy.get('form').submit();
 
-                        resolve(true);
+                        resolve();
                     },
-                    (error) => {
-                        reject(error);
-                    }
+                    reject
                 );
         });
     });
