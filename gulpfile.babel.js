@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import rename from 'gulp-rename';
-
 import browserify from 'browserify';
 import buffer from 'vinyl-buffer';
 import del from 'del';
@@ -15,26 +14,21 @@ const ALL_SOURCES = [
     'src/*.js',
 ];
 
-gulp.task('lint', function() {
-    return gulp.src(ALL_SOURCES)
+exports.lint = (cb) => {
+    gulp.src(ALL_SOURCES)
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 
-});
+    cb();
+};
 
-gulp.task('clean', function() {
-    return Promise.all([del('lib/'), del('coverage/')]);
-});
-
-
-gulp.task('build', [
-    'build:bundled:min',
-    'build:external:min',
-    'build:bundled:debug',
-    'build:external:debug',
-    'build:components',
-]);
+exports.clean = (cb) => {
+    Promise.all([del('lib/'), del('coverage/')])
+        .then(() => {
+            cb();
+        });
+};
 
 const bundled_config = {
     debug: true,
@@ -52,29 +46,32 @@ const external_config = {
     bundleExternal: false,
 };
 
-gulp.task('build:bundled:min', function() {
-    return buildBundle(bundled_config, '.bundle.min.js', true);
-});
+function build_bundle_min(cb) {
+    buildBundle(bundled_config, '.bundle.min.js', true);
+    cb();
+}
 
-gulp.task('build:external:min', function() {
-    return buildBundle(external_config, '.min.js', true);
-});
+function build_external_min(cb) {
+    buildBundle(external_config, '.min.js', true);
+    cb();
+}
 
-gulp.task('build:bundled:debug', function() {
-    return buildBundle(bundled_config, '.bundle.js', false);
-});
+function build_bundled_debug(cb) {
+    buildBundle(bundled_config, '.bundle.js', false);
+    cb();
+}
 
-gulp.task('build:external:debug', function() {
-    return buildBundle(external_config, '.js', false);
-});
+function build_external_debug(cb) {
+    buildBundle(external_config, '.js', false);
+    cb();
+}
 
-gulp.task('build:components', function() {
-    return gulp.src('src/*.js')
-        .pipe(sourcemaps.init())
-        .pipe(babel())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('lib/components'));
-});
+exports.build = gulp.series(
+    build_bundle_min,
+    build_external_min,
+    build_bundled_debug,
+    build_external_debug
+);
 
 function buildBundle(options, extname, minify) {
     let stream = browserify(options)

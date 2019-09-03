@@ -28,7 +28,7 @@ export default function({Cypress, cy}) {
                 .inbox(inbox_id)
                 .waitForEmail({'to_email': email_address})
                 .then(
-                    async (message) => {
+                    async(message) => {
                         const body = await message.getHtmlBody();
                         const doc = new DOMParser().parseFromString(body, 'text/html');
                         const btn = doc.querySelector('a');
@@ -56,7 +56,7 @@ export default function({Cypress, cy}) {
                 .inbox(inbox_id)
                 .waitForEmail({'to_email': email_address})
                 .then(
-                    async (message) => {
+                    async(message) => {
                         const body = await message.getHtmlBody();
                         const doc = new DOMParser().parseFromString(body, 'text/html');
                         const btn = doc.querySelector('a');
