@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import eslint from 'gulp-eslint';
-import babel from 'gulp-babel';
 import rename from 'gulp-rename';
 import browserify from 'browserify';
 import buffer from 'vinyl-buffer';
@@ -33,13 +32,13 @@ exports.clean = (cb) => {
 const bundled_config = {
     debug: true,
     entries: 'src/index.js',
-    standalone: 'index',
+    standalone: 'cypress-mailtrap',
 };
 
 const external_config = {
     debug: true,
     entries: 'src/index.js',
-    standalone: 'index',
+    standalone: 'cypress-mailtrap',
     external: [
         '@xedi/mailtrap',
     ],
@@ -77,7 +76,7 @@ function buildBundle(options, extname, minify) {
     let stream = browserify(options)
         .transform('babelify')
         .bundle()
-        .pipe(source('index.js'))
+        .pipe(source('cypress-mailtrap.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({
             loadMaps: true,

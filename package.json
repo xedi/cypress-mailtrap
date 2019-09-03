@@ -1,8 +1,8 @@
 {
-  "name": "cypress-mailtrap",
+  "name": "@xedi/cypress-mailtrap",
   "version": "1.0.0",
   "description": "Cypress Commands for interacting with Mailtrap.io",
-  "main": "lib/index.js",
+  "main": "lib/cypress-mailtrap.js",
   "scripts": {
     "test": "mocha --opts ./mocha.opts test/*.spec.js",
     "build": "gulp build",
