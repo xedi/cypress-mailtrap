@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import eslint from 'gulp-eslint';
+import babel from 'gulp-babel';
 import rename from 'gulp-rename';
 import browserify from 'browserify';
 import buffer from 'vinyl-buffer';
@@ -65,11 +66,22 @@ function build_external_debug(cb) {
     cb();
 }
 
+function build_components(cb) {
+    gulp.src('src/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('lib'));
+
+    cb();
+}
+
 exports.build = gulp.series(
     build_bundle_min,
     build_external_min,
     build_bundled_debug,
-    build_external_debug
+    build_external_debug,
+    build_components,
 );
 
 function buildBundle(options, extname, minify) {
