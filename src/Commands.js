@@ -26,24 +26,26 @@ export default function({Cypress, cy}) {
         return new Promise((resolve, reject) => {
             Mailtrap.setApiToken(api_token)
                 .inbox(inbox_id)
-                .waitForEmail({'to_email': email_address})
-                .then(
-                    async(message) => {
-                        const body = await message.getHtmlBody();
-                        const doc = new DOMParser().parseFromString(body, 'text/html');
-                        const btn = doc.querySelector('a');
+                .then((inbox) => {
+                    inbox.waitForEmail({'to_email': email_address})
+                        .then(
+                            async(message) => {
+                                const body = await message.getHtmlBody();
+                                const doc = new DOMParser().parseFromString(body, 'text/html');
+                                const btn = doc.querySelector('a');
 
-                        await cy.request({
-                            'url': btn.getAttribute('href'),
-                            'method': 'GET',
-                        });
+                                await cy.request({
+                                    'url': btn.getAttribute('href'),
+                                    'method': 'GET',
+                                });
 
-                        await message.delete();
+                                await message.delete();
 
-                        resolve();
-                    },
-                    reject
-                );
+                                resolve();
+                            },
+                            reject
+                        );
+                });
         });
     });
 
