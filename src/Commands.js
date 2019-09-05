@@ -21,8 +21,6 @@ export default function({Cypress, cy}) {
         const api_token = fetchCypressEnvVar('MAILTRAP_API_TOKEN');
         const inbox_id = fetchCypressEnvVar('MAILTRAP_INBOX_ID');
 
-        cy.log('Verifying account');
-
         return new Promise((resolve, reject) => {
             Mailtrap.setApiToken(api_token)
                 .inbox(inbox_id)
