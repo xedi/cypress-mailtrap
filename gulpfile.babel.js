@@ -43,7 +43,7 @@ const external_config = {
     external: [
         '@xedi/mailtrap',
     ],
-    bundleExternal: false,
+    bundleExternal: true,
 };
 
 function build_bundle_min(cb) {
