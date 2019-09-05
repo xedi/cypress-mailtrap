@@ -30,7 +30,7 @@
     "registry": "http://npm.pkg.github.com/"
   },
   "dependencies": {
-    "@xedi/mailtrap": "^1.2.4"
+    "@xedi/mailtrap": "^1.2.5-0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
