@@ -21,10 +21,10 @@ export default function({Cypress, cy}) {
         const api_token = fetchCypressEnvVar('MAILTRAP_API_TOKEN');
         const inbox_id = fetchCypressEnvVar('MAILTRAP_INBOX_ID');
 
-        return new Promise((resolve, reject) => {
-            cy.log('Verifying account');
+        cy.log('Verifying account');
 
-            Mailtrap.setAuthorizationToken(api_token)
+        return new Promise((resolve, reject) => {
+            Mailtrap.setApiToken(api_token)
                 .inbox(inbox_id)
                 .waitForEmail({'to_email': email_address})
                 .then(
@@ -52,7 +52,7 @@ export default function({Cypress, cy}) {
         const inbox_id = fetchCypressEnvVar('MAILTRAP_INBOX_ID');
 
         return new Promise((resolve, reject) => {
-            Mailtrap.setAuthorizationToken(api_token)
+            Mailtrap.setApiToken(api_token)
                 .inbox(inbox_id)
                 .waitForEmail({'to_email': email_address})
                 .then(
