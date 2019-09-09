@@ -5,11 +5,11 @@ export default function({Cypress, cy}) {
         return cy.task('mailtrap:inbox:get', inbox_id);
     });
 
-    Cypress.Commands.add('waitForEmail', (inbox_id, search_params, timeout = 6000, interval = 1000) => {
-        return cy.task('mailtrap:inbox:wait', { inbox_id, search_params, timeout, interval });
+    Cypress.Commands.add('deleteMessage', (inbox_id, message_id) => {
+        return cy.task('mailtrap:message:delete', { inbox_id, message_id });
     });
 
-    Cypress.Commands.add('verifyAccount', (message) => {
-        return cy.task('mailtrap:message:verify', { message });
+    Cypress.Commands.add('waitForEmail', (inbox_id, search_params, timeout = 6000, interval = 1000) => {
+        return cy.task('mailtrap:inbox:wait', { inbox_id, search_params, timeout, interval });
     });
 }

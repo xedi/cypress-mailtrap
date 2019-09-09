@@ -24,6 +24,20 @@ export default function({Cypress, cy, on, config}) {
                         return messages;
                       });
                 });
+        },
+        'mailtrap:message:get': ({ inbox_id, message_id }) => {
+            return Mailtrap.setApiToken(config.env['MAILTRAP_API_TOKEN'])
+                .message(inbox_id, message_id);
+        },
+
+        'mailtrap:message:delete': ({ inbox_id, message_id }) => {
+            return Mailtrap.setApiToken(config.env['MAILTRAP_API_TOKEN'])
+                .message(inbox_id, message_id)
+                .then((message) => {
+                    message.delete();
+
+                    return 'deleted';
+                });
         }
     });
 };
