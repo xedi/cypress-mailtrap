@@ -30,15 +30,15 @@
     "registry": "http://npm.pkg.github.com/"
   },
   "dependencies": {
-    "@xedi/mailtrap": "^1.2.5-0"
+    "@xedi/mailtrap": "^1.2.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-transform-modules-umd": "^7.0.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.0",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-istanbul": "^5.0.0",
-    "@babel/plugin-transform-modules-umd": "^7.0.0",
-    "@babel/preset-env": "^7.5.0",
-    "@babel/register": "^7.5.0",
     "babelify": "^10.0.0",
     "braces": ">=2.3.1",
     "browserify": "^16.0.0",
