@@ -2,14 +2,13 @@
   "name": "@xedi/cypress-mailtrap",
   "version": "1.2.1",
   "description": "Cypress Commands for interacting with Mailtrap.io",
-  "main": "lib/cypress-mailtrap.min.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha --opts ./mocha.opts test/*.spec.js",
     "build": "gulp build",
     "clean": "gulp clean",
     "lint": "gulp lint",
-    "prepublishOnly": "scripts/prepublish.sh",
-    "postpublish": "scripts/postpublish.sh"
+    "prepublishOnly": "scripts/prepublish.sh"
   },
   "repository": {
     "type": "git",
