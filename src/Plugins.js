@@ -1,6 +1,6 @@
 import Mailtrap from '@xedi/mailtrap';
 
-export default function({Cypress, cy, on, config}) {
+export default function({ on, config }) {
     on('task', {
         'mailtrap:inbox:list': () => {
             return Mailtrap.setApiToken(config.env['MAILTRAP_API_TOKEN'])
