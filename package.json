@@ -1,6 +1,6 @@
 {
   "name": "@xedi/cypress-mailtrap",
-  "version": "1.2.2-1",
+  "version": "1.2.2",
   "description": "Cypress Commands for interacting with Mailtrap.io",
   "main": "lib/index.js",
   "scripts": {
